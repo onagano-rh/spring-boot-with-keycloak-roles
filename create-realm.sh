@@ -63,5 +63,9 @@ create_realmrole "admin"
 ${KEYCLOAK_HOME}/bin/kcadm.sh add-roles -r ${REALM_NAME} --gname "Team 01" --rolename "normal"
 ${KEYCLOAK_HOME}/bin/kcadm.sh add-roles -r ${REALM_NAME} --gname "Team 01" --rolename "admin"
 ${KEYCLOAK_HOME}/bin/kcadm.sh add-roles -r ${REALM_NAME} --gname "Team 02" --rolename "normal"
+# Example of a client role
 ${KEYCLOAK_HOME}/bin/kcadm.sh add-roles -r ${REALM_NAME} --uusername testuser01 --cclientid realm-management --rolename view-users
+
+# Register a client
+${KEYCLOAK_HOME}/bin/kcadm.sh create clients -r ${REALM_NAME} -s clientId=test-client -s publicClient=true -s standardFlowEnabled=true -s rootUrl='http://localhost:8080' -s 'redirectUris=["/*"]'
 
