@@ -1,0 +1,16 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: test-client
+            # "none" means a public cleint with PKCE
+            # https://docs.spring.io/spring-security/reference/reactive/oauth2/client/authorization-grants.html#_initiating_the_authorization_request
+            client-authentication-method: none
+            authorization-grant-type: authorization_code
+            scope: openid
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8180/realms/test-realm
+            user-name-attribute: preferred_username
