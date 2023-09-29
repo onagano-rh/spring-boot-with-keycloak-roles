@@ -120,9 +120,34 @@ JSONを返すからといってログイン画面へのリダイレクトがで�
 アプリケーション開発者がレルム管理者に作成と適切なアサインの依頼を行うことになる。
 
 
+
 ## 発展的な内容
 
 - ロールはレルムごとではなくクライアントごとに定義することもできる
   - スクリプトで設定した"normal"や"admin"はレルムロールである
   - レルムロールのトークン内のクレイム名は `realm_access.roles` だが、クライアントロールは `resource_access.<client_id>.roles` である
   - `MySecurityConfig.java` 内では realm_access.roles` を拾うようにしかコーディングしていないので、クライアントロールも取り込むには改修が必要になる
+
+
+
+## 参考リンク
+
+- Spring Securityの公式ドキュメント
+  - https://docs.spring.io/spring-security/reference/reactive/oauth2/index.html
+- Spring Securityの公式サンプルコード
+  - https://github.com/spring-projects/spring-security-samples
+- 解説記事1 (英語)
+  - https://dzone.com/articles/spring-boot-3-keycloak
+  - OAuth2 ClientではなくResource Serverの例だが、ロールを扱っている
+- 解説記事2 (英語)
+  - https://developers.redhat.com/articles/2023/07/24/how-integrate-spring-boot-3-spring-security-and-keycloak
+  - OAuth2 Clientの例だが、ロールは扱っていない
+- 解説記事3 (日本語)
+  - https://kazuhira-r.hatenablog.com/entry/2022/09/08/015028
+  - ロールを扱っている
+- 私的別作
+  - https://github.com/onagano-rh/jbosswork/tree/master/rhsso-msapps-sb
+  - 解説記事3を参考にロールを扱っている
+  - OAuth2 Clientの ui-frontend とResource Serverの api-backend の二つのサーバからなる
+  - ui-frontednではapi-backendへのアクセスにアクセストークンを再利用している
+
