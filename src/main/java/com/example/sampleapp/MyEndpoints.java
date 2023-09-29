@@ -1,7 +1,9 @@
 package com.example.sampleapp;
 
+import java.util.Collection;
 import java.util.Map;
 
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,10 +30,34 @@ public class MyEndpoints {
             "username", user.getName());
     }
 
-    // You can inspect your Principal as a JSON object.
+    @RequestMapping("/protected/normal")
+    public Map<String, String> protectedNormalArea() {
+        OidcUser user = (OidcUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        @SuppressWarnings("unchecked")
+        Collection<GrantedAuthority> roles = (Collection<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+
+        return Map.of(
+            "message", "Here is a protected normal area.",
+            "username", user.getName(),
+            "authorities", String.valueOf(roles));
+    }
+
+    @RequestMapping("/protected/admin")
+    public Map<String, String> protectedAdminArea() {
+        OidcUser user = (OidcUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        @SuppressWarnings("unchecked")
+        Collection<GrantedAuthority> roles = (Collection<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+
+        return Map.of(
+            "message", "Here is a protected admin area.",
+            "username", user.getName(),
+            "authorities", String.valueOf(roles));
+    }
+
+    // You can inspect your authentication as a JSON object.
     @RequestMapping("/inspect")
-    public Object inspectUser() {
-        return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public Object inspect() {
+        return SecurityContextHolder.getContext().getAuthentication();
     }
 
 }
