@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>sample-app</artifactId>
+	<artifactId>spring-boot-with-keycloak-roles</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>sample-app</name>
 	<description>Spring Boot example app using authorized by Keycloak Roles</description>
