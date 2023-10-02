@@ -29,7 +29,8 @@ Red Hat Build of Keycloak 22 がまだリリースされていないのでこの
 ${KEYCLOAK_HOME}/bin/kc.sh start-dev --http-port=8180
 ```
 
-masterレルムの管理ユーザを登録ログインし、サンプルアプリで使用するレルムとその専用管理ユーザを作成する。
+トップページ (http://localhost:8180/) へアクセスしてmasterレルムの管理ユーザを登録し、
+続けてmasterレルムの管理コンソールにログイン、サンプルアプリで使用するレルムとその専用管理ユーザを作成する。
 
 - レルム "test-realm" を作成
 - そのレルム内にユーザ "test-admin" を作成
@@ -95,6 +96,7 @@ JSONを返すからといってログイン画面へのリダイレクトがで�
 ```
 
 これは以下のようにtest-realmを構築する。
+ユーザのパスワードは全て"password"としているが、初回ログイン時に変更を求められる。
 
 - Group "Team 01" (with role "normal" and "admin" assigned)
   - User "testuser01"
@@ -104,6 +106,23 @@ JSONを返すからといってログイン画面へのリダイレクトがで�
   - User "testuser04"
   - User "testuser05"
   - User "testuser06"
+
+また、本Spring Bootアプリのクライアント登録も行っている。
+
+- Client ID: test-client
+  Public client: true (すなわち"Client authentication: OFF")
+  Standard flow: true
+  Redirect URL: http://localhost:8080/*
+
+以上はスクリプト内で自動で行われるが、以下の設定は管理コンソールにて手動で行う。
+これによりIDトークンにもロールのクレイムが載るようになる。
+
+- "Client scopes > roles > Mappers > realm roles" を表示させる
+  "Add to ID token: On" に設定しSaveする
+
+
+
+## 動作確認
 
 グループに割り当てたロールはそのグループ内のユーザにも継承される。
 よってサンプルアプリで以下のような動きを確認できる。
