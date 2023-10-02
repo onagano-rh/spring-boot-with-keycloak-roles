@@ -109,16 +109,18 @@ JSONを返すからといってログイン画面へのリダイレクトがで�
 
 また、本Spring Bootアプリのクライアント登録も行っている。
 
-- Client ID: test-client
-  Public client: true (すなわち"Client authentication: OFF")
-  Standard flow: true
-  Redirect URL: http://localhost:8080/*
+- クライアント登録
+  - Client ID: test-client
+  - Public client: true (すなわち"Client authentication: OFF")
+  - Standard flow: true
+  - Redirect URL: http://localhost:8080/*
 
 以上はスクリプト内で自動で行われるが、以下の設定は管理コンソールにて手動で行う。
 これによりIDトークンにもロールのクレイムが載るようになる。
 
-- "Client scopes > roles > Mappers > realm roles" を表示させる
-  "Add to ID token: On" に設定しSaveする
+- IDトークンにロールを含めるための設定
+  - "Client scopes > roles > Mappers > realm roles" を表示させる
+  - "Add to ID token: On" に設定しSaveする
 
 
 
